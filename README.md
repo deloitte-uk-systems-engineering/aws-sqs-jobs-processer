@@ -50,7 +50,14 @@ zip -r <FUNCTION_NAME>.zip .
 aws s3 cp <FUNCTION_NAME>.zip s3://<BUCKET_NAME>/v1.0.0/<FUNCTION_NAME>.zip
 ```
 
-## Deploy
+## Deploy Lambda layer
+
+```bash
+cd deploy/lambdas/layer # change to lambda layer directory
+sh updateLayer.sh # uploads lambda layer to S3 bucket
+```
+
+## Deploy AWS stack
 
 ```bash
 cd deploy # change to deploy directory
@@ -61,7 +68,7 @@ terraform destroy # destroys AWS stack
 
 ## Usages
 
-- Make a `POST` request to `<API_ENDPOINT>/jobs` to trigger a job which creates todos. Each item in the `data` array creates a random todo:
+- Make a `POST` request to `<API_ENDPOINT>/jobs` to trigger a job which creates todos. Each item in the `data` array creates a todo:
 
 ```json
 {
@@ -79,7 +86,9 @@ terraform destroy # destroys AWS stack
 - Run the script:
 
 ```bash
-sh deploy/lambdas/processQueue/updateFunction.sh
+cd deploy/lambdas/processQueue # change to lambda directory
+chmod +x updateFunction.sh # set permission to run script
+./updateFunction.sh # run the script
 ```
 
 ## Contributing
@@ -87,6 +96,10 @@ sh deploy/lambdas/processQueue/updateFunction.sh
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+If you find this project helpful, please give a :star: or even better buy me a coffee :coffee: :point_down: because I'm a caffeine addict :sweat_smile:
+
+<a href="https://www.buymeacoffee.com/matlau" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ## License
 
